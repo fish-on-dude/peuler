@@ -1,0 +1,14 @@
+FC=gfortran
+FCFLAGS=-fopenmp -I./modules
+
+%.o :: %.f90
+	$(FC) $(FCFLAGS) -c $<
+
+all: p10
+
+p10: sieve.o p10.o
+	$(FC) $(FCFLAGS) $^ -o $@
+
+sieve.o: modules/sieve.f90
+
+

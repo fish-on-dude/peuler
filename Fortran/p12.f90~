@@ -1,0 +1,37 @@
+program p12
+  ! find first triangle number with at least 500 factors
+  use sieve_mod
+  integer, parameter :: Nfac = 500
+  integer(idp):: primes(Nfac) ! won't need any primes higher than 500...
+  integer :: pf, pflast
+
+  call gen_primes(Nfac, primes, nfound)
+
+  i = 500
+  pf = pfac(500)
+  print*, pf
+
+
+contains
+  
+  function pfac(n)
+    ! find prime factors of a number
+    integer n, ntemp
+    integer pfac(nfound)
+    ntemp = n
+    pfac = 0
+    do i=1,nfound
+       do while (mod(ntemp,primes(i))==0)
+          pfac(i) = pfac(i) +1
+          ntemp = ntemp / primes(i)
+       end do
+       if (ntemp ==0) exit
+    end do
+  end function pfac
+
+end program
+    
+  
+
+  
+ 

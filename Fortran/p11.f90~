@@ -1,0 +1,12 @@
+program p11
+  ! load a grid of numbers
+  ! find the max product of 4 numbers in any direction
+  dimension N(20,20)
+  
+  open(10, file='p11.dat')
+
+  read(10,*) N
+
+  write(*,'(20(i2.2, 1x))')N
+
+end program p11

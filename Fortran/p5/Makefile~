@@ -1,0 +1,2 @@
+p5.exe: p5.f90
+	gfortran -c p5.f90 -o p5

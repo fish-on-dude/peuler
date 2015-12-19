@@ -1,0 +1,8 @@
+program p10
+  ! find sum of all primes below a given number
+  use sieve_mod
+  print*, 'N: '
+  read(*,*) N
+  call gen_primes(N, primes, nfound)
+  print*, sum(primes)
+end program p10

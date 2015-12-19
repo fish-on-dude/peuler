@@ -1,0 +1,12 @@
+program p5
+  ! find smallest number evenly divisible by all numbers 1..20
+  dimension primes(7)
+  primes = [2,3,5,7,11,13,17]
+  data N /20/
+  ifac = 1
+  do i=1,size(primes)
+     p = primes(i)
+     ifac = ifac**(int(log(real(20))/log(real(p))))
+  end do
+  print*, ifac
+end program p5

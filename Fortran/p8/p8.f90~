@@ -1,0 +1,14 @@
+program p8
+  integer N(1000)
+  integer p(9993)
+  read(10, '(1000i1)') N
+
+  !$omp do parallel default(none)shared(p)private(i)
+  do i=1,9993
+     p(i) = product(N(i:i+7))
+  end do
+  !$omp end parallel do
+
+  m = maxloc(p)
+  print*, N(m:m+7), p(m)
+end program p8

@@ -1,0 +1,16 @@
+program p29
+  integer, parameter :: MAXLIM=100;
+  logical sieve(2:MAXLIM, 2:MAXLIM)
+  sieve = .TRUE.
+  do 1 i=2,MAXLIM
+     do 1 j=2,MAXLIM
+        do 1 k=2,MAXLIM
+           if(mod(j,k)/=0)cycle
+           if (i**k>MAXLIM)cycle
+           
+           m=j/k ! i^j = i^(m*k) = (i^k)^m
+1          sieve(i**k,m)=.FALSE.
+
+   print*, count(sieve)
+           
+           

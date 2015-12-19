@@ -1,0 +1,42 @@
+program p11
+  ! load a grid of numbers
+  ! find the max product of 4 numbers in any direction
+  dimension N(20,20)
+  integer, dimension(20,20):: PLR, PUD, PDIAG, PDIAG2
+  integer, dimension(20,20,4) :: PTL, PTDN, PTD, PTDS! shift left, down, diagonal, cross-diagonal
+  integer ml(2)
+  
+  open(10, file='p11.dat')
+  read(10,*) N
+10 format(20(i3))
+20 format(20(i2.2,1x))
+  
+  
+  do i=0,3
+     PTL(:,:,i+1) = EOSHIFT(N,i,dim=1)
+     PTDN(:,:,i+1) = EOSHIFT(N,i,dim=2)
+     PTD(:,:,i+1) = EOSHIFT(PTL(:,:,i+1),i,dim=2)
+     PTDS(:,:,i+1)= EOSHIFT(PTL(:,:,i+1),-i,dim=2)
+  end do
+  
+  PLR = product(PTL, dim=3)
+  ml = maxloc(PLR)
+  print*, 'maxloc plr:   ', ml, ':', PLR(ml(1), ml(2))
+  print*, PTL(ml(1), ml(2), :)
+
+
+  PUD = product(PTDN,dim=3)
+  ml = maxloc(PUD)
+  print*, 'maxloc pud:   ', ml, ':', maxval(PUD)
+  print*, PTD(ml(1), ml(2), :)
+  
+  PDIAG=product(PTD, dim=3)
+  print*, 'diag'
+    write(*,10) PDIAG/1000000
+  print*, 'maxloc pdiag: ', maxloc(PDIAG), ':', maxval(PDIAG)
+
+  PDIAG2=product(PTDS,dim=3)
+  print*, 'cross diagonal'
+  print*, 'maxloc pdiag2: ',maxloc(PDIAG2),':',maxval(PDIAG2)
+  
+end program p11
